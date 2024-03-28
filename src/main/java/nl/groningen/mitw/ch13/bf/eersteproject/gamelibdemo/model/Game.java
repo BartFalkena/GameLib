@@ -3,8 +3,9 @@ package nl.groningen.mitw.ch13.bf.eersteproject.gamelibdemo.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
-import java.time.LocalDate;
+import java.util.List;
 
 /**
  * represents a game that
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 @Entity
 public class Game {
     @Id @GeneratedValue
-    private Long bookId;
+    private Long gameId;
     private String Title;
     private String Genre;
     private String Type;
@@ -25,8 +26,36 @@ public class Game {
         Type = type;
     }
 
+    @OneToMany (mappedBy = "game")
+    private List<GameKey> gameKeys;
+
     public Game() {
 
+    }
+
+    public int getNumberOfUnusedKeys() {
+        int count = 0;
+        for (GameKey gamekey : gameKeys) {
+            if (gamekey.getAvailable())
+                    count++;
+
+
+        }
+        return count;
+
+    }
+    public int getTotalNumberOfGeneratedKeys() {
+        return gameKeys.size();
+    }
+
+
+
+    public Long getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 
     public String getTitle() {
@@ -53,11 +82,11 @@ public class Game {
         Type = type;
     }
 
-    public Long getBookId() {
-        return bookId;
+    public List<GameKey> getGameKeys() {
+        return gameKeys;
     }
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
+    public void setGameKeys(List<GameKey> gameKeys) {
+        this.gameKeys = gameKeys;
     }
 }
