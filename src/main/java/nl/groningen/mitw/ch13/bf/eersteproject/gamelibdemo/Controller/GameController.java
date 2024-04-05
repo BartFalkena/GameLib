@@ -3,6 +3,7 @@ package nl.groningen.mitw.ch13.bf.eersteproject.gamelibdemo.Controller;
 import nl.groningen.mitw.ch13.bf.eersteproject.gamelibdemo.model.Game;
 import nl.groningen.mitw.ch13.bf.eersteproject.gamelibdemo.repositories.GameKeyRepository;
 import nl.groningen.mitw.ch13.bf.eersteproject.gamelibdemo.repositories.GameRepository;
+import nl.groningen.mitw.ch13.bf.eersteproject.gamelibdemo.repositories.GenreRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,9 +25,11 @@ import java.util.List;
 @Controller
 public class GameController {
     private final GameRepository gameRepository;
+    private final GenreRepository genreRepository;
 
-    public GameController(GameRepository gameRepository) {
+    public GameController(GameRepository gameRepository, GenreRepository genreRepository) {
         this.gameRepository = gameRepository;
+        this.genreRepository = genreRepository;
     }
 
 
@@ -42,6 +45,7 @@ public class GameController {
     @GetMapping("/game/new")
     private String showGameForm(Model model) {
         model.addAttribute("game", new Game());
+        model.addAttribute("allGenres",genreRepository.findAll());
 
         return "gameForm";
     }

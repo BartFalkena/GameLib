@@ -1,11 +1,9 @@
 package nl.groningen.mitw.ch13.bf.eersteproject.gamelibdemo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * represents a game that
@@ -17,20 +15,20 @@ public class Game {
     @Id @GeneratedValue
     private Long gameId;
     private String Title;
-    private String Genre;
     private String Type;
 
-    public Game(String title, String genre, String type) {
-        Title = title;
-        Genre = genre;
-        Type = type;
-    }
+    @ManyToMany
+    private Set<Genre> genres;
 
     @OneToMany (mappedBy = "game")
     private List<GameKey> gameKeys;
 
-    public Game() {
+    public Set<Genre> getGenres() {
+        return genres;
+    }
 
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
     }
 
     public int getNumberOfUnusedKeys() {
@@ -64,14 +62,6 @@ public class Game {
 
     public void setTitle(String title) {
         Title = title;
-    }
-
-    public String getGenre() {
-        return Genre;
-    }
-
-    public void setGenre(String genre) {
-        Genre = genre;
     }
 
     public String getType() {
