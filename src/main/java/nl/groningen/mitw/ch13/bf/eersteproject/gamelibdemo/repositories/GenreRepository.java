@@ -1,6 +1,7 @@
 package nl.groningen.mitw.ch13.bf.eersteproject.gamelibdemo.repositories;
 
 import nl.groningen.mitw.ch13.bf.eersteproject.gamelibdemo.model.Game;
+import nl.groningen.mitw.ch13.bf.eersteproject.gamelibdemo.model.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author B.J. Falkena
  */
-public interface GenreRepository extends JpaRepository<Game, Long> {
+public interface GenreRepository extends JpaRepository<Genre, Long> {
 }

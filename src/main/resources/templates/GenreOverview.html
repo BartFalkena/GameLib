@@ -13,14 +13,14 @@
     <th>Name</th>
     <th></th>
   </tr>
-  <tr th:each="author : ${allAuthors}">
-    <td th:text="${author.name}"></td>
+  <tr th:each="genre : ${allGenres}">
+    <td th:text="${genre.name}"></td>
     <td></td>
   </tr>
-  <form th:action="@{/author/new}" method="post" th:object="${newAuthor}">
+  <form th:action="@{/genre/new}" method="post" th:object="${newGenres}">
     <tr>
       <td><input type="text" th:field="*{name}"></td>
-      <td><input type="submit" value="Save new author"></td>
+      <td><input type="submit" value="Save new genre"></td>
     </tr>
   </form>
 

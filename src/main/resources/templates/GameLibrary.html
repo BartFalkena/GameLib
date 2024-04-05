@@ -19,7 +19,7 @@
     </tr>
     <tr th:each="game : ${allGames}">
         <td th:text="${game.getTitle()}"></td>
-        <td th:text="${game.getGenre()}"></td>
+        <td th:text="${game.getGenres()}"></td>
         <td th:text="${game.getType()}"></td>
         <td th:text="${game.getNumberOfUnusedKeys()}"></td>
         <td th:text="${game.getTotalNumberOfGeneratedKeys()}"></td>

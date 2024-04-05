@@ -1,13 +1,17 @@
 package nl.groningen.mitw.ch13.bf.eersteproject.gamelibdemo.Controller;
 
-import ch.qos.logback.core.model.Model;
+import nl.groningen.mitw.ch13.bf.eersteproject.gamelibdemo.model.Game;
 import nl.groningen.mitw.ch13.bf.eersteproject.gamelibdemo.model.Genre;
 import nl.groningen.mitw.ch13.bf.eersteproject.gamelibdemo.repositories.GenreRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * hier de opdracht die je gaat maken
@@ -25,21 +29,21 @@ public class GenreController {
     }
 
     @GetMapping("/genre")
-    private String showAllGenres (Model model) {
+    private String showAllGenres(Model model) {
+        model.addAttribute("allGenres", genreRepository.findAll());
+        model.addAttribute("newGenres", new Genre());
 
-        //add.attributes
 
-        return "genreOverview";
+        return "GenreOverview";
+    }
+@PostMapping("/genre/new")
+private String saveOrUpdateGenre(@ModelAttribute("newGenre") Genre genre, BindingResult result) {
+    if (!result.hasErrors()) {
+        genreRepository.save(genre);
     }
 
-    @PostMapping("/genre/new")
-    private String saveOrUpdateGenre(@ModelAttribute("newGenre") Genre genre, BindingResult result) {
-        if (!result.hasErrors()) {
-//            genreRepository.save(genre);
-        }
-
-        return "redirect:/author";
-    }
+    return "redirect:/genre";
+}
 
 
 

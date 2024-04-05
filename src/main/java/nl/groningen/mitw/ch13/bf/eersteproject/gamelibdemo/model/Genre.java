@@ -35,7 +35,7 @@ public class Genre {
         return name;
     }
 
-    public void setName(String genre) {
-        this.name = genre;
+    public void setName(String name) {
+        this.name = name;
     }
 }

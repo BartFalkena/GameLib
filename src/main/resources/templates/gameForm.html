@@ -12,7 +12,6 @@
     <table>
         <tr>
             <td><label for="titleField">Title</label></td>
-            <td><label for="genreField">Genre</label></td>
             <td><label for="typeField">Type</label></td>
         </tr>
         <tr>
@@ -20,7 +19,12 @@
                 <input type="text" id="titleField" th:field="*{title}" />
             </td>
             <td>
-                <input type="text" id="genreField" th:field="*{genre}" />
+                <select th:field="*{genres}" multiple>
+                    <option th:each="genre : ${allGenres}"
+                            th:text="${genre.name}"
+                            th:value="${genre.genreId}">
+                    </option>
+                </select>
             </td>
             <td>
                 <input type="text" id="typeField" th:field="*{type}" />
